@@ -1,0 +1,33 @@
+{
+	"compilerOptions": {
+		"target": "es2018",
+		"lib": ["es5", "es6", "ES2018"],
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"resolveJsonModule": true,
+		"allowJs": true,
+		"outDir": "./dist",
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"strict": true,
+		"noImplicitAny": false,
+		"strictPropertyInitialization": false,
+		"typeRoots": ["./src/@types"]
+	},
+	"include": [
+		"src/**/*",
+		"repositories",
+		"coverage/lcov-report/usecase/user/userCreate.test.ts"
+	],
+	"exclude": [
+		"node_modules",
+		"dist",
+		"./src/usecase/user/userUseCase.test.ts",
+		"./src/usecase/tasks/taskUseCase.test.ts"
+	],
+	"ts-node": {
+		"files": true
+	}
+}

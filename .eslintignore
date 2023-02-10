@@ -1,0 +1,6 @@
+db.ts
+coverage/*
+*.test.ts
+babel.config.js
+jest.config.ts
+dist/*
