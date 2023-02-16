@@ -22,7 +22,13 @@ export class UserUpdateUseCase {
         if (queriedUser.length > 0) throw new UnauthorizedError();
 
         const passwordHasher = new HashPassword();
-        password = await passwordHasher.execute(password, 10);
+        const HashedPassword = await passwordHasher.execute(password, 10);
+
+        queriedUser[0].name = name;
+        queriedUser[0].email = email;
+        queriedUser[0].password = HashedPassword;
+        queriedUser[0].updatedAt = new Date();
+
         await queriedUser[0].save();
         delete queriedUser[0].password;
 
@@ -31,9 +37,5 @@ export class UserUpdateUseCase {
 
     checkEmailPassword(email: string, password: string) {
         if (!email || !password) throw new InvalidEmailOrPasswordError();
-    }
-
-    async saveUser(user: IUser) {
-        await user[0].save(user.name, user.email, user.password);
     }
 }

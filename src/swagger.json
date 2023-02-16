@@ -1,0 +1,597 @@
+{
+	"openapi": "3.0.0",
+	"info": {
+		"title": "Task API",
+		"description": "This API is used to manage tasks",
+		"termsOfService": "http://localhost:3000/terms",
+		"contact": {
+			"email": "carlos.lemos@dataside"
+		},
+		"version": "1.0.0"
+	},
+	"servers": [
+		{
+			"url": "http://localhost:3000",
+			"description": "test url"
+		},
+		{
+			"url": "http://www.dataside.com.br/api/task",
+			"description": "production url"
+		}
+	],
+	"paths": {
+		"/login": {
+			"post": {
+				"summary": "Log in",
+				"description": "This route is used for user login",
+				"tags": ["Login"],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Login"
+							},
+							"examples": {
+								"User": {
+									"value": {
+										"email": "John Marine",
+										"password": ""
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"$ref": "#/components/schemas/Login"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"$ref": "#/components/schemas/Login"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/refreshToken": {
+			"post": {
+				"summary": "Refresh token",
+				"description": "This route is used to get user refresh token",
+				"tags": ["RefreshToken"],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/RefreshToken"
+							},
+							"examples": {
+								"User": {
+									"value": {
+										"refreshToken": ""
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"$ref": "#/components/schemas/RefreshToken"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"$ref": "#/components/schemas/RefreshToken"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/user": {
+			"post": {
+				"summary": "User creation",
+				"description": "This route is used for user registration",
+				"tags": ["Users"],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Users"
+							},
+							"examples": {
+								"User": {
+									"value": {
+										"name": "John Marine",
+										"email": "john@gmail.com",
+										"password": ""
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "User created",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"$ref": "#/components/schemas/Users"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"$ref": "#/components/schemas/Users"
+								}
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"summary": "Get user profile",
+				"description": "This route is used to query user profile",
+				"tags": ["Users"],
+				"security": [{ "bearerAuth": [] }],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"$ref": "#/components/schemas/Users"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"$ref": "#/components/schemas/Users"
+								}
+							}
+						}
+					}
+				}
+			},
+			"put": {
+				"summary": "Update one User",
+				"description": "This route is used to update a User",
+				"tags": ["Users"],
+				"security": [{ "bearerAuth": [] }],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Users"
+							},
+							"examples": {
+								"User": {
+									"value": {
+										"name": "John Marine",
+										"email": "john@gmail.com",
+										"password": ""
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "User updated",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"$ref": "#/components/schemas/Users"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"$ref": "#/components/schemas/Users"
+								}
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"summary": "User deletion",
+				"description": "This route is used to delete a User",
+				"tags": ["Users"],
+				"security": [{ "bearerAuth": [] }],
+				"responses": {
+					"204": {
+						"description": "User deleted",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"$ref": "#/components/schemas/Users"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"$ref": "#/components/schemas/Users"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/task": {
+			"post": {
+				"summary": "Task creation",
+				"description": "This route is used for task creation",
+				"tags": ["Tasks"],
+				"security": [{ "bearerAuth": [] }],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Tasks"
+							},
+							"examples": {
+								"User": {
+									"value": {
+										"title": "Clean house",
+										"description": "Use vacuum cleaner on the main carpet",
+										"done": "false"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Task created",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"$ref": "#/components/schemas/Tasks"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"$ref": "#/components/schemas/Tasks"
+								}
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"summary": "Get all tasks from a user",
+				"description": "This route is used to query all tasks from a user",
+				"tags": ["Tasks"],
+				"security": [{ "bearerAuth": [] }],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"$ref": "#/components/schemas/Tasks"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"$ref": "#/components/schemas/Tasks"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/task/filter/{title}/{done}": {
+			"get": {
+				"summary": "Get tasks based on a filter",
+				"description": "This route is used to query tasks based on title, supports '%like%' filter",
+				"tags": ["Tasks"],
+				"security": [{ "bearerAuth": [] }],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Tasks"
+							},
+							"examples": {
+								"User": {
+									"value": {
+										"title": "Clean",
+										"done": "true"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"$ref": "#/components/schemas/Tasks"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"$ref": "#/components/schemas/Tasks"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/task/{taskId}": {
+			"get": {
+				"summary": "Get task based on id",
+				"description": "This route is used to query expecific task with matching id",
+				"tags": ["Tasks"],
+				"security": [{ "bearerAuth": [] }],
+				"parameters": [
+					{
+						"name": "TaskId",
+						"in": "path",
+						"description": "Task ID",
+						"required": true
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"$ref": "#/components/schemas/Tasks"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"$ref": "#/components/schemas/Tasks"
+								}
+							}
+						}
+					}
+				}
+			},
+			"put": {
+				"summary": "Update one Task",
+				"description": "This route is used to update a Task",
+				"tags": ["Tasks"],
+				"security": [{ "bearerAuth": [] }],
+				"parameters": [
+					{
+						"name": "TaskId",
+						"in": "path",
+						"description": "Task ID",
+						"required": true
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Tasks"
+							},
+							"examples": {
+								"User": {
+									"value": {
+										"title": "Clean house",
+										"description": "Use vacuum cleaner on the main carpet",
+										"done": "true"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Task updated",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"$ref": "#/components/schemas/Tasks"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"$ref": "#/components/schemas/Tasks"
+								}
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"summary": "Task deletion",
+				"description": "This route is used to delete a Task",
+				"tags": ["Tasks"],
+				"security": [{ "bearerAuth": [] }],
+				"parameters": [
+					{
+						"name": "TaskId",
+						"in": "path",
+						"description": "Task ID",
+						"required": true
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Task deleted",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"$ref": "#/components/schemas/Tasks"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"$ref": "#/components/schemas/Tasks"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"components": {
+		"schemas": {
+			"Users": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"password": {
+						"type": "number"
+					}
+				}
+			},
+			"Tasks": {
+				"type": "object",
+				"properties": {
+					"title": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"done": {
+						"type": "boolean"
+					}
+				}
+			},
+			"Login": {
+				"type": "object",
+				"properties": {
+					"email": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					}
+				}
+			},
+			"RefreshToken": {
+				"type": "object",
+				"properties": {
+					"refreshToken": {
+						"type": "string"
+					}
+				}
+			}
+		},
+		"securitySchemes": {
+			"bearerAuth": {
+				"type": "http",
+				"scheme": "bearer",
+				"bearerFormat": "JWT"
+			}
+		}
+	}
+}
