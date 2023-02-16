@@ -23,17 +23,17 @@ export class CreateUserUseCase {
 
         const passwordHasher = new HashPassword();
         password = await passwordHasher.execute(password, 10);
-        const savedUser = await this.saveUser({ name, email, password });
-        delete savedUser.password;
+        const createdUser = await this.createUser({ name, email, password });
+        delete createdUser.password;
 
-        return savedUser;
+        return createdUser;
     }
 
     checkEmailPassword(email: string, password: string) {
         if (!email || !password) throw new InvalidEmailOrPasswordError();
     }
 
-    async saveUser({ name, email, password }: IUserCreate) {
+    async createUser({ name, email, password }: IUserCreate) {
         return await User.create({ name, email, password });
     }
 }
