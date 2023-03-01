@@ -4,3 +4,4 @@ coverage/*
 babel.config.js
 jest.config.ts
 dist/*
+database-data-mongo/*
