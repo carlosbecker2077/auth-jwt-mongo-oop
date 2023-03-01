@@ -1,41 +1,19 @@
-import { IUser } from '../../database/schemas/User';
-import { UserFindMailUseCase } from './findUserEmailUseCase';
-import { HashPassword } from './hashPasswordUseCase';
-import { UserFindByIdUseCase } from './userFindByIdUseCase';
-
-import {
-    EmailAlreadyExistsError,
-    InvalidEmailOrPasswordError,
-    UnauthorizedError,
-} from '../../helpers/api-erros';
+import { User } from '../../entities/User/User';
+import { EmailAlreadyExistsError } from '../../helpers/api-erros';
+import { IUserRequestDTO } from './createUserDTO';
+import { IUserRepository } from '../../repositories/interfaces/userRepository';
+import { UserPassword } from '../../entities/User/password';
 
 export class UserUpdateUseCase {
-    async execute(id: string, name: string, email: string, password: string) {
-        this.checkEmailPassword(email, password);
+    constructor(private usersRepository: IUserRepository) {}
+    async execute(userData: IUserRequestDTO) {
+        const user = new User(userData.name, userData.email, userData.password);
 
-        const findMail = new UserFindMailUseCase();
-        const userExists = await findMail.execute(email);
-        if (userExists) throw new EmailAlreadyExistsError();
-
-        const findId = new UserFindByIdUseCase();
-        const queriedUser = await findId.execute(id);
-        if (queriedUser.length > 0) throw new UnauthorizedError();
-
-        const passwordHasher = new HashPassword();
-        const HashedPassword = await passwordHasher.execute(password, 10);
-
-        queriedUser[0].name = name;
-        queriedUser[0].email = email;
-        queriedUser[0].password = HashedPassword;
-        queriedUser[0].updatedAt = new Date();
-
-        await queriedUser[0].save();
-        delete queriedUser[0].password;
-
-        return queriedUser;
-    }
-
-    checkEmailPassword(email: string, password: string) {
-        if (!email || !password) throw new InvalidEmailOrPasswordError();
+        const userAlreadyExists = await this.usersRepository.findByEmail(
+            user.email
+        );
+        if (userAlreadyExists) throw new EmailAlreadyExistsError();
+        user.password = await UserPassword.encryptPassword(user.password);
+        return await this.usersRepository.update(user);
     }
 }

@@ -1,8 +1,11 @@
-import { User } from '../../database/schemas/User';
+import { NotFoundError } from '../../helpers/api-erros';
+import { IUserRepository } from '../../repositories/interfaces/userRepository';
 
-export class UserFindByIdUseCase {
+export class UserFindMailUseCase {
+    constructor(private usersRepository: IUserRepository) {}
     async execute(id: string) {
-        const queriedUser = await User.find({ _id: id });
-        return queriedUser;
+        const userExists = await this.usersRepository.findById(id);
+        if (!userExists) throw new NotFoundError();
+        return userExists;
     }
 }

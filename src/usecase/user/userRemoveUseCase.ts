@@ -1,15 +1,8 @@
-import { UserFindByIdUseCase } from './userFindByIdUseCase';
-
-import { NotFoundError } from '../../helpers/api-erros';
+import { IUserRepository } from '../../repositories/interfaces/userRepository';
 
 export class UserRemoveUseCase {
+    constructor(private usersRepository: IUserRepository) {}
     async execute(id: string) {
-        const findById = new UserFindByIdUseCase();
-        const userToRemove = await findById.execute(id);
-        if (userToRemove.length === 0) throw new NotFoundError();
-
-        await userToRemove[0].remove();
-
-        return userToRemove[0];
+        return await this.usersRepository.remove(id);
     }
 }

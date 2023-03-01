@@ -7,21 +7,21 @@ export class UserLoginUseCase {
     async execute(email: string, password: string) {
         const findByEmail = new UserFindMailUseCase();
         const user = await findByEmail.execute(email);
-        if (!user || !user[0].password) throw new InvalidEmailOrPasswordError();
-
+        if (!user || !user?.password) throw new InvalidEmailOrPasswordError();
         const comparePassword = new ComparePasswordUseCase();
         const isPasswordCompatible = await comparePassword.execute(
             password,
-            user[0].password
+            user?.password
         );
+
         if (!isPasswordCompatible) throw new InvalidEmailOrPasswordError();
 
         const signToken = new SignToken();
-        const token = await signToken.execute(user[0].id, '1h');
+        const token = await signToken.execute(user.id, '1h');
 
         // const refreshToken = await saveRefreshToken(user[0].id):
 
-        delete user[0].password;
+        delete user.password;
         return { user, token }; // refreshToken
     }
 }

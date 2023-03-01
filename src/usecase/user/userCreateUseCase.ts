@@ -1,39 +1,21 @@
-import { User } from '../../database/schemas/User';
-import { UserFindMailUseCase } from './findUserEmailUseCase';
-import { HashPassword } from './hashPasswordUseCase';
-
-import {
-    EmailAlreadyExistsError,
-    InvalidEmailOrPasswordError,
-} from '../../helpers/api-erros';
-
-export interface IUserCreate {
-    name: string;
-    email: string;
-    password: string;
-}
+import { User } from '../../entities/User/User';
+import { EmailAlreadyExistsError } from '../../helpers/api-erros';
+import { IUserRepository } from '../../repositories/interfaces/userRepository';
+import { IUserRequestDTO } from './createUserDTO';
+import { UserPassword } from '../../entities/User/password';
 
 export class CreateUserUseCase {
-    async execute({ name, email, password }: IUserCreate) {
-        this.checkEmailPassword(email, password);
+    constructor(private usersRepository: IUserRepository) {}
 
-        const findMail = new UserFindMailUseCase();
-        const userExists = await findMail.execute(email);
-        if (userExists) throw new EmailAlreadyExistsError();
+    async execute(userData: IUserRequestDTO) {
+        const user = new User(userData.name, userData.email, userData.password);
 
-        const passwordHasher = new HashPassword();
-        password = await passwordHasher.execute(password, 10);
-        const createdUser = await this.createUser({ name, email, password });
-        delete createdUser.password;
+        const userAlreadyExists = await this.usersRepository.findByEmail(
+            user.email
+        );
+        if (userAlreadyExists) throw new EmailAlreadyExistsError();
 
-        return createdUser;
-    }
-
-    checkEmailPassword(email: string, password: string) {
-        if (!email || !password) throw new InvalidEmailOrPasswordError();
-    }
-
-    async createUser({ name, email, password }: IUserCreate) {
-        return await User.create({ name, email, password });
+        user.password = await UserPassword.encryptPassword(user.password);
+        return await this.usersRepository.save(user);
     }
 }
