@@ -1,5 +1,5 @@
 import { InvalidEmailOrPasswordError } from '../../helpers/api-erros';
-import { UserFindMailUseCase } from './findUserEmailUseCase';
+import { UserFindMailUseCase } from '../user/findUserEmailUseCase';
 import { ComparePasswordUseCase } from './comparePasswordUseCase';
 import { SignToken } from '../../utils/utils';
 

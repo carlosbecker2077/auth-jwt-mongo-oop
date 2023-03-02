@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
-import { CreateUserUseCase } from '../usecase/user/userCreateUseCase';
+import { CreateUserUseCase } from '../usecase/user/createUserUseCase';
 import { BadRequestError } from '../helpers/api-erros';
-import { UserLoginUseCase } from '../usecase/user/userLoginUseCase';
+import { UserLoginUseCase } from '../usecase/auth/userLoginUseCase';
 import { UserGetProfileUseCase } from '../usecase/user/userGetProfileUseCase';
 import { userCheckid } from '../usecase/user/userCheckId';
-import { UserUpdateUseCase } from '../usecase/user/userUpdateUseCase';
-import { UserRemoveUseCase } from '../usecase/user/userRemoveUseCase';
+import { UserUpdateUseCase } from '../usecase/user/updateUserUseCase';
+import { UserRemoveUseCase } from '../usecase/user/removeUserUseCase';
 
 export class UserController {
     async create(req: Request, res: Response) {

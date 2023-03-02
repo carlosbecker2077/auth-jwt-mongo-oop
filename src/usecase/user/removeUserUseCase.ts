@@ -1,6 +1,6 @@
 import { IUserRepository } from '../../repositories/interfaces/userRepository';
 
-export class UserRemoveUseCase {
+export class RemoveUserUseCase {
     constructor(private usersRepository: IUserRepository) {}
     async execute(id: string) {
         return await this.usersRepository.remove(id);
