@@ -3,7 +3,7 @@ import { IUser } from '../mongodb/schemas/User';
 
 export interface IUserRepository {
     save(user: User): Promise<void>;
-    findByEmail(email: string): Promise<undefined | IUser>;
+    findByEmail(email: string): Promise<undefined | IUser | null>;
     findById(id: string): Promise<undefined | IUser>;
     update(user: User): Promise<void>;
     remove(id: string): Promise<void>;

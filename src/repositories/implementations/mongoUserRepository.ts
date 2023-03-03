@@ -8,10 +8,8 @@ export class MongoUsersRepository implements IUserRepository {
         await userModel.save();
     }
 
-    async findByEmail(email: string): Promise<undefined | IUser> {
-        const user = await UserSchema.findOne({ email });
-        if (!user) throw new Error('User not found');
-        return user;
+    async findByEmail(email: string): Promise<undefined | IUser | null> {
+        return await UserSchema.findOne({ email });
     }
 
     async findById(id: string): Promise<undefined | IUser> {

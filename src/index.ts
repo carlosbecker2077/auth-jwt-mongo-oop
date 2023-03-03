@@ -3,7 +3,7 @@ import 'dotenv/config';
 import express from 'express';
 import { errorMiddleware } from './middlewares/error';
 import routes from './routes';
-import { MongoConnection } from './database/mongoconnection';
+import { MongoConnection } from './repositories/mongodb/mongoconnection';
 import swaggerUi from 'swagger-ui-express';
 import swaggerDocs from './swagger.json';
 
