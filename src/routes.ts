@@ -1,7 +1,7 @@
 import { Router } from 'express';
 // import { RefreshTokenController } from './controllers/RefreshTokenController';
 // import { TaskController } from './controllers/TaskController';
-import { createUserController } from './usecase/index';
+import { createUserController, loginController } from './usecase/index';
 import { authMiddleware } from './middlewares/authMiddleware';
 
 const routes = Router();
@@ -9,8 +9,10 @@ const routes = Router();
 routes.post('/user', (req, res) => {
     return createUserController.handle(req, res);
 });
-// routes.post('/login', new UserController().login);
-// routes.post('/refreshToken', new RefreshTokenController().create);
+
+routes.post('/login', (req, res) => {
+    return loginController.handle(req, res);
+});
 
 // todas as rotas abaixo são protegidas por token
 
