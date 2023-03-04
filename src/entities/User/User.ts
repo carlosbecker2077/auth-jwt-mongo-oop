@@ -7,12 +7,20 @@ export class User {
     public name: string;
     public email: string;
     public password: string;
+    public updatedAt: Date;
 
-    constructor(name: string, email: string, password: string, id?: string) {
+    constructor(
+        name: string,
+        email: string,
+        password: string,
+        id?: string,
+        updatedAt?: Date
+    ) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.id = !id ? uuid() : id;
+        this.updatedAt = updatedAt as Date;
 
         if (!UserValidation.validationEmail(email)) {
             throw new Error(`Invalid e-mail: '${email}'`);

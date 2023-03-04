@@ -1,7 +1,12 @@
 import { Router } from 'express';
 // import { RefreshTokenController } from './controllers/RefreshTokenController';
 // import { TaskController } from './controllers/TaskController';
-import { createUserController, loginController } from './usecase/index';
+import {
+    createUserController,
+    loginController,
+    removeController,
+    updateController,
+} from './usecase/index';
 import { authMiddleware } from './middlewares/authMiddleware';
 
 const routes = Router();
@@ -16,9 +21,14 @@ routes.post('/login', (req, res) => {
 
 // todas as rotas abaixo são protegidas por token
 
-// routes.get('/user', authMiddleware, new UserController().getProfile);
-// routes.put('/user', authMiddleware, new UserController().update);
-// routes.delete('/user', authMiddleware, new UserController().remove);
+routes.put('/user', authMiddleware, (req, res) => {
+    return updateController.handle(req, res);
+});
+
+routes.delete('/user', authMiddleware, (req, res) => {
+    return removeController.handle(req, res);
+});
+
 // routes.post('/task', authMiddleware, new TaskController().create);
 // routes.get('/task', authMiddleware, new TaskController().getAllByUser);
 // routes.get('/task/filter/:title/:done',authMiddleware, new TaskController().getFilter);

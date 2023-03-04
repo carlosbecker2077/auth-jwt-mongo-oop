@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { UnauthorizedError } from '../helpers/api-erros';
-import { User } from '../database/schemas/User';
+import { UserSchema } from '../repositories/mongodb/schemas/User';
 import 'dotenv/config';
 import jwt from 'jsonwebtoken';
 
@@ -24,7 +24,7 @@ export async function authMiddleware(
     const { id } = jwt.verify(token, process.env.JWT_PASS ?? '') as JwtPayload;
 
     try {
-        const user = await User.findOne({ _id: id });
+        const user = await UserSchema.findOne({ _id: id });
         if (!user) {
             throw new UnauthorizedError();
         }

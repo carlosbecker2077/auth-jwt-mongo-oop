@@ -12,9 +12,8 @@ export class MongoUsersRepository implements IUserRepository {
         return await UserSchema.findOne({ email });
     }
 
-    async findById(id: string): Promise<undefined | IUser> {
+    async findById(id: string): Promise<undefined | IUser | null> {
         const user = await UserSchema.findOne({ id });
-        if (!user) throw new Error('User not found');
         return user;
     }
 
@@ -24,7 +23,7 @@ export class MongoUsersRepository implements IUserRepository {
     }
 
     async remove(id: string): Promise<void> {
-        const result = await UserSchema.remove(id);
+        const result = await UserSchema.findOneAndDelete({ id });
         if (!result) throw new Error('User not found');
     }
 }

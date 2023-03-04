@@ -7,6 +7,8 @@ import { FindUserIdUseCase } from './user/findUserByIdUseCase';
 import { CreateUserController } from '../adapters/controllers/userController/createUserController';
 import { LoginController } from '../adapters/controllers/authController/loginController';
 import { LoginUserUsecase } from './auth/loginUserUseCase';
+import { UpdateUserController } from '../adapters/controllers/userController/updateUserController';
+import { RemoveUserController } from '../adapters/controllers/userController/removeUserController';
 
 const mongoUserRepository = new MongoUsersRepository();
 
@@ -23,5 +25,12 @@ const loginUserUseCase = new LoginUserUsecase(mongoUserRepository);
 // user controllers
 const createUserController = new CreateUserController(createUserUseCase);
 const loginController = new LoginController(loginUserUseCase);
+const updateController = new UpdateUserController(updateUserUseCase);
+const removeController = new RemoveUserController(removeUserUseCase);
 
-export { createUserController, loginController };
+export {
+    createUserController,
+    loginController,
+    updateController,
+    removeController,
+};
