@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { IUserRequestDTO } from '../../../usecase/user/createUserDTO';
+import { IUserRequestDTO } from '../../../usecase/user/UserDTO';
 import { UpdateUserUseCase } from '../../../usecase/user/updateUserUseCase';
 
 export class UpdateUserController {

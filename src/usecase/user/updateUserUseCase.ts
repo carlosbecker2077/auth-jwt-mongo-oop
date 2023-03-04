@@ -3,7 +3,7 @@ import {
     EmailAlreadyExistsError,
     UnauthorizedError,
 } from '../../helpers/api-erros';
-import { IUserRequestDTO } from './createUserDTO';
+import { IUserRequestDTO } from './UserDTO';
 import { IUserRepository } from '../../repositories/interfaces/userRepository';
 import { UserPassword } from '../../entities/User/password';
 

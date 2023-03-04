@@ -1,7 +1,7 @@
 import { User } from '../../entities/User/User';
 import { EmailAlreadyExistsError } from '../../helpers/api-erros';
 import { IUserRepository } from '../../repositories/interfaces/userRepository';
-import { IUserRequestDTO } from './createUserDTO';
+import { IUserRequestDTO } from './UserDTO';
 import { UserPassword } from '../../entities/User/password';
 
 export class CreateUserUseCase {

@@ -33,4 +33,5 @@ export {
     loginController,
     updateController,
     removeController,
+    findUserIdUseCase,
 };
