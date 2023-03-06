@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { UnauthorizedError } from '../helpers/api-erros';
 import 'dotenv/config';
 import jwt from 'jsonwebtoken';
-import { findUserIdUseCase } from '../usecase/index';
+import { findUserByIdUseCase } from '../usecase/index';
 
 type JwtPayload = {
     id: string;
@@ -25,7 +25,7 @@ export async function authMiddleware(
 
     try {
         // const user = await UserSchema.findOne({ _id: id });
-        const user = await findUserIdUseCase.execute(id);
+        const user = await findUserByIdUseCase.execute(id);
         if (!user) {
             throw new UnauthorizedError();
         }

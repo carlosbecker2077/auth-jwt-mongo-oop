@@ -6,6 +6,7 @@ import {
     loginController,
     removeController,
     updateController,
+    findUserByIdController,
 } from './usecase/index';
 import { authMiddleware } from './middlewares/authMiddleware';
 
@@ -27,6 +28,10 @@ routes.put('/user', authMiddleware, (req, res) => {
 
 routes.delete('/user', authMiddleware, (req, res) => {
     return removeController.handle(req, res);
+});
+
+routes.get('/user', authMiddleware, (req, res) => {
+    return findUserByIdController.handle(req, res);
 });
 
 // routes.post('/task', authMiddleware, new TaskController().create);

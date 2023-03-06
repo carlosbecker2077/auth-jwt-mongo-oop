@@ -2,13 +2,13 @@ import { MongoUsersRepository } from '../repositories/implementations/mongoUserR
 import { CreateUserUseCase } from './user/createUserUseCase';
 import { UpdateUserUseCase } from './user/updateUserUseCase';
 import { RemoveUserUseCase } from './user/removeUserUseCase';
-import { FindUserMailUseCase } from './user/findUserEmailUseCase';
-import { FindUserIdUseCase } from './user/findUserByIdUseCase';
+import { FindUserByIdUseCase } from './user/findUserByIdUseCase';
 import { CreateUserController } from '../adapters/controllers/userController/createUserController';
 import { LoginController } from '../adapters/controllers/authController/loginController';
 import { LoginUserUsecase } from './auth/loginUserUseCase';
 import { UpdateUserController } from '../adapters/controllers/userController/updateUserController';
 import { RemoveUserController } from '../adapters/controllers/userController/removeUserController';
+import { FindUserByIdController } from '../adapters/controllers/userController/findUserIdController';
 
 const mongoUserRepository = new MongoUsersRepository();
 
@@ -16,8 +16,7 @@ const mongoUserRepository = new MongoUsersRepository();
 const createUserUseCase = new CreateUserUseCase(mongoUserRepository);
 const updateUserUseCase = new UpdateUserUseCase(mongoUserRepository);
 const removeUserUseCase = new RemoveUserUseCase(mongoUserRepository);
-const findUserMailUseCase = new FindUserMailUseCase(mongoUserRepository);
-const findUserIdUseCase = new FindUserIdUseCase(mongoUserRepository);
+const findUserByIdUseCase = new FindUserByIdUseCase(mongoUserRepository);
 
 // auth usecases
 const loginUserUseCase = new LoginUserUsecase(mongoUserRepository);
@@ -27,11 +26,13 @@ const createUserController = new CreateUserController(createUserUseCase);
 const loginController = new LoginController(loginUserUseCase);
 const updateController = new UpdateUserController(updateUserUseCase);
 const removeController = new RemoveUserController(removeUserUseCase);
+const findUserByIdController = new FindUserByIdController(findUserByIdUseCase);
 
 export {
     createUserController,
     loginController,
     updateController,
     removeController,
-    findUserIdUseCase,
+    findUserByIdUseCase,
+    findUserByIdController,
 };

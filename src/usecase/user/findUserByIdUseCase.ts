@@ -1,7 +1,7 @@
 import { NotFoundError } from '../../helpers/api-erros';
 import { IUserRepository } from '../../repositories/interfaces/userRepository';
 
-export class FindUserIdUseCase {
+export class FindUserByIdUseCase {
     constructor(private usersRepository: IUserRepository) {}
     async execute(id: string) {
         const userExists = await this.usersRepository.findById(id);
