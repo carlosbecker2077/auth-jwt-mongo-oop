@@ -1,12 +1,16 @@
 import { Router } from 'express';
-// import { RefreshTokenController } from './controllers/RefreshTokenController';
-// import { TaskController } from './controllers/TaskController';
 import {
     createUserController,
     loginController,
-    removeController,
-    updateController,
+    removeUserController,
+    updateUserController,
     findUserByIdController,
+    createTaskController,
+    updateTaskController,
+    removeTaskController,
+    findTaskByIdController,
+    findTaskByTitleTaskController,
+    findTaskByUserIdController,
 } from './usecase/index';
 import { authMiddleware } from './middlewares/authMiddleware';
 
@@ -22,23 +26,42 @@ routes.post('/login', (req, res) => {
 
 // todas as rotas abaixo são protegidas por token
 
-routes.put('/user', authMiddleware, (req, res) => {
-    return updateController.handle(req, res);
+routes.put('/user/:', authMiddleware, (req, res) => {
+    return updateUserController.handle(req, res);
 });
 
 routes.delete('/user', authMiddleware, (req, res) => {
-    return removeController.handle(req, res);
+    return removeUserController.handle(req, res);
 });
 
 routes.get('/user', authMiddleware, (req, res) => {
     return findUserByIdController.handle(req, res);
 });
 
-// routes.post('/task', authMiddleware, new TaskController().create);
-// routes.get('/task', authMiddleware, new TaskController().getAllByUser);
-// routes.get('/task/filter/:title/:done',authMiddleware, new TaskController().getFilter);
-// routes.get('/task/:taskId', authMiddleware, new TaskController().getById);
-// routes.put('/task/:taskId', authMiddleware, new TaskController().update);
-// routes.delete('/task/:taskId', authMiddleware, new TaskController().remove);
+// task routes
+
+routes.post('/task', authMiddleware, (req, res) => {
+    return createTaskController.handle(req, res);
+});
+
+routes.put('/task', authMiddleware, (req, res) => {
+    return updateTaskController.handle(req, res);
+});
+
+routes.delete('/task/:taskId', authMiddleware, (req, res) => {
+    return removeTaskController.handle(req, res);
+});
+
+routes.get('/task/id/:taskId', authMiddleware, (req, res) => {
+    return findTaskByIdController.handle(req, res);
+});
+
+routes.get('/task/title/:title', authMiddleware, (req, res) => {
+    return findTaskByTitleTaskController.handle(req, res);
+});
+
+routes.get('/task/user/:userId', authMiddleware, (req, res) => {
+    return findTaskByUserIdController.handle(req, res);
+});
 
 export default routes;

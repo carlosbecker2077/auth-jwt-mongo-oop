@@ -48,8 +48,8 @@ const findTaskByUserIdUseCase = new FindTaskByUserIdUseCase(
 // user controllers
 const createUserController = new CreateUserController(createUserUseCase);
 const loginController = new LoginController(loginUserUseCase);
-const updateController = new UpdateUserController(updateUserUseCase);
-const removeController = new RemoveUserController(removeUserUseCase);
+const updateUserController = new UpdateUserController(updateUserUseCase);
+const removeUserController = new RemoveUserController(removeUserUseCase);
 const findUserByIdController = new FindUserByIdController(findUserByIdUseCase);
 
 // task controllers
@@ -67,8 +67,8 @@ const findTaskByUserIdController = new FindTaskByUserIdController(
 export {
     createUserController,
     loginController,
-    updateController,
-    removeController,
+    updateUserController,
+    removeUserController,
     findUserByIdUseCase,
     findUserByIdController,
     createTaskController,
