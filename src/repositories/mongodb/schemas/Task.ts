@@ -24,4 +24,4 @@ const taskSchema = new Schema<ITask>({
     updatedAt: { type: Date, required: false, default: () => Date.now() },
 });
 
-export const Task = model<ITask>('Task', taskSchema);
+export const TaskSchema = model<ITask>('Task', taskSchema);
