@@ -15,8 +15,8 @@ export class Task {
         description: string,
         done: boolean,
         userId: string,
-        id?: string,
-        updatedAt?: Date
+        updatedAt?: Date,
+        id?: string
     ) {
         this.title = title;
         this.description = description;

@@ -18,18 +18,21 @@ export class MongoTasksRepository implements ITaskRepository {
         if (!result) throw new Error('task not found');
     }
 
-    async findById(id: string): Promise<undefined | ITask | null> {
-        const task = await TaskSchema.findOne({ id });
+    async findById(
+        id: string,
+        userId: string
+    ): Promise<undefined | ITask | null> {
+        const task = await TaskSchema.findOne({ id, userId });
         return task;
     }
 
-    async findByUserId(userId: string): Promise<undefined | ITask | null> {
-        const task = await TaskSchema.findOne({ userId });
+    async findByUserId(userId: string): Promise<undefined | ITask[] | null> {
+        const task = await TaskSchema.find({ userId });
         return task;
     }
 
-    async findByTitle(title: string): Promise<undefined | ITask | null> {
-        const task = await TaskSchema.findOne({ title });
+    async findByTitle(title: string): Promise<undefined | ITask[] | null> {
+        const task = await TaskSchema.find({ title });
         return task;
     }
 }
