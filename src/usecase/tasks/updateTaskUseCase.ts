@@ -5,7 +5,7 @@ import { NotFoundError } from '../../helpers/api-erros';
 
 export class UpdateTaskUseCase {
     constructor(private tasksRepository: ITaskRepository) {}
-    async execute(taskData: ITaskRequestDTO, taskId: string, userId: string) {
+    async execute(taskData: ITaskRequestDTO, userId: string) {
         const task = new Task(
             taskData.title,
             taskData.description,
@@ -15,7 +15,7 @@ export class UpdateTaskUseCase {
         );
 
         const userTaskExists = await this.tasksRepository.findById(
-            taskId,
+            taskData.id as string,
             userId
         );
 

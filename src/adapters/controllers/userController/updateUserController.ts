@@ -9,7 +9,7 @@ export class UpdateUserController {
         const userData: IUserRequestDTO = req.body;
         try {
             await this.updateUserUseCase.execute(userData, token as string);
-            return res.status(200).send();
+            return res.status(204).send();
         } catch (err: any) {
             return res.status(400).json({ err: err.message });
         }
