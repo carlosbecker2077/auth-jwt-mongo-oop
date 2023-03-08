@@ -22,6 +22,8 @@ import { RemoveTaskController } from '../adapters/controllers/taskController/rem
 import { FindTaskByIdController } from '../adapters/controllers/taskController/findTaskByIdController';
 import { FindTaskByTitleController } from '../adapters/controllers/taskController/findTaskByTitleController';
 import { FindTaskByUserIdController } from '../adapters/controllers/taskController/findTaskByUserIdController';
+import { RefreshTokenController } from '../adapters/controllers/authController/refreshTokenController';
+import { RefreshTokenUseCase } from './auth/refreshTokenUseCase';
 
 const mongoUserRepository = new MongoUsersRepository();
 const mongoTaskRepository = new MongoTasksRepository();
@@ -52,6 +54,11 @@ const updateUserController = new UpdateUserController(updateUserUseCase);
 const removeUserController = new RemoveUserController(removeUserUseCase);
 const findUserByIdController = new FindUserByIdController(findUserByIdUseCase);
 
+// refreshToken
+const refreshTokenController = new RefreshTokenController(
+    new RefreshTokenUseCase()
+);
+
 // task controllers
 const createTaskController = new CreateTaskController(createTaskUseCase);
 const updateTaskController = new UpdateTaskController(updateTaskUseCase);
@@ -77,4 +84,5 @@ export {
     findTaskByIdController,
     findTaskByTitleTaskController,
     findTaskByUserIdController,
+    refreshTokenController,
 };

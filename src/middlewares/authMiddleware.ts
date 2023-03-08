@@ -4,7 +4,7 @@ import 'dotenv/config';
 import jwt from 'jsonwebtoken';
 import { findUserByIdUseCase } from '../usecase/index';
 
-type JwtPayload = {
+export type JwtPayload = {
     id: string;
 };
 
@@ -24,7 +24,6 @@ export async function authMiddleware(
     const { id } = jwt.verify(token, process.env.JWT_PASS ?? '') as JwtPayload;
 
     try {
-        // const user = await UserSchema.findOne({ _id: id });
         const user = await findUserByIdUseCase.execute(id);
         if (!user) {
             throw new UnauthorizedError();

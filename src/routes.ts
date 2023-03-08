@@ -11,6 +11,7 @@ import {
     findTaskByIdController,
     findTaskByTitleTaskController,
     findTaskByUserIdController,
+    refreshTokenController,
 } from './usecase/index';
 import { authMiddleware } from './middlewares/authMiddleware';
 
@@ -60,8 +61,13 @@ routes.get('/task/title/:title', authMiddleware, (req, res) => {
     return findTaskByTitleTaskController.handle(req, res);
 });
 
-routes.get('/task/user/:userId', authMiddleware, (req, res) => {
+routes.get('/task/user/', authMiddleware, (req, res) => {
     return findTaskByUserIdController.handle(req, res);
+});
+
+// refresh token
+routes.post('/refreshToken', authMiddleware, (req, res) => {
+    return refreshTokenController.handle(req, res);
 });
 
 export default routes;
