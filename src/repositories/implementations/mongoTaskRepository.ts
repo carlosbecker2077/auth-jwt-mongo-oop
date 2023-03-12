@@ -8,21 +8,31 @@ export class MongoTasksRepository implements ITaskRepository {
         await taskModel.save();
     }
 
-    async update(task: Task): Promise<void> {
-        const result = await TaskSchema.findOneAndUpdate({ id: task.id }, task);
+    async update(task: Task, userId: string): Promise<void> {
+        const result = await TaskSchema.findOneAndUpdate(
+            { id: task.id, userId },
+            task
+        );
         if (!result) throw new Error('task not found');
     }
 
-    async remove(id: string): Promise<void> {
-        const result = await TaskSchema.findOneAndDelete({ id });
+    async remove(userId: string, id?: string): Promise<void> {
+        if (!id) {
+            const result = TaskSchema.findOne({ userId });
+            if (!result) throw new Error('tasks not found');
+            await TaskSchema.remove({ userId });
+        }
+
+        const result = TaskSchema.findOne({ userId, _id: id });
         if (!result) throw new Error('task not found');
+        await TaskSchema.remove({ userId, _id: id });
     }
 
     async findById(
         id: string,
         userId: string
     ): Promise<undefined | ITask | null> {
-        const task = await TaskSchema.findOne({ id, userId });
+        const task = await TaskSchema.findOne({ _id: id, userId: userId });
         return task;
     }
 
@@ -31,8 +41,11 @@ export class MongoTasksRepository implements ITaskRepository {
         return task;
     }
 
-    async findByTitle(title: string): Promise<undefined | ITask[] | null> {
-        const task = await TaskSchema.find({ title });
+    async findByTitle(
+        title: string,
+        userId: string
+    ): Promise<undefined | ITask[] | null> {
+        const task = await TaskSchema.find({ title, userId });
         return task;
     }
 }

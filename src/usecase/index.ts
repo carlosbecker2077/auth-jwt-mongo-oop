@@ -31,7 +31,10 @@ const mongoTaskRepository = new MongoTasksRepository();
 // user usecases
 const createUserUseCase = new CreateUserUseCase(mongoUserRepository);
 const updateUserUseCase = new UpdateUserUseCase(mongoUserRepository);
-const removeUserUseCase = new RemoveUserUseCase(mongoUserRepository);
+const removeUserUseCase = new RemoveUserUseCase(
+    mongoUserRepository,
+    mongoTaskRepository
+);
 const findUserByIdUseCase = new FindUserByIdUseCase(mongoUserRepository);
 
 // auth usecases

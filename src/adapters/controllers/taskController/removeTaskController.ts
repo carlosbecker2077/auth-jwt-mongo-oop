@@ -8,7 +8,7 @@ export class RemoveTaskController {
         const userId = req.headers.userId;
         const { taskId } = req.params;
         try {
-            await this.removeTaskUseCase.execute(taskId, userId as string);
+            await this.removeTaskUseCase.execute(userId as string, taskId);
             return res.status(200).send();
         } catch (err: any) {
             return res.status(400).json({ err: err.message });

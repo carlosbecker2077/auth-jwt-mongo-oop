@@ -5,7 +5,7 @@ export class RefreshTokenController {
     constructor(private refreshTokenUseCase: RefreshTokenUseCase) {}
 
     async handle(req: Request, res: Response) {
-        const token = req.params.userId;
+        const token = req.body;
         try {
             const refreshToken = this.refreshTokenUseCase.execute(token);
             return res.status(200).json({ refreshToken });

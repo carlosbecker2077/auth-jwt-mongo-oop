@@ -1,19 +1,20 @@
+Próximos passos
 [x] Criar a camada do repository;
 [x] criar os usecases de login
 [x] criar camada de controller do user
-[] tem bug no update, parece que as vezes ele altera outro usuario
-[x] deixar salvar com o mesmo email se for o mesmo id
+[] tem bug no update, está alterando outro usuário.
 [x] revisar o middleware, ta fazendo consulta direto do schema
-[] colocar filtro like no usecase de title
+[] colocar filtro like no usecase de find task by title
+[x] implementar delete cascade (talvez colocar uma lógica que se o taskid nao for mandado, deleta todas as tasks daquele usuario)
 
-rotas para testar
-[x] createtask
-[] updatetask um usuario conseguiu mudar a task de um outro usuario (mas atualizou de boa)
-[] removetask um usuario conseguiu remover a task de um outro usuario (mas removeu de boa)
-[] findIDtask tem bug, não tras a task que eu coloco mas tras outra (sempre a mesma, mesmo que seja de outro usuario)
-[] findTitletask vem task de outros caras
+Rotas para testar
+[x] createtask[] updatetask um usuário conseguiu mudar a task de um outro usuário;
+[] removetask um usuário conseguiu remover a task de um outro usuário;
+[x] findIDtask tem bug, não traz a task que eu coloco mas traz outra (sempre a mesma, mesmo que seja de outro usuário)
+[x] findTitletask vem task de outros caras
 [x] findUsertask
-
 [] refreshtoken (criar rota e testar)
-
 [] separar as rotas de usuario e de task e de auth
+
+Debito tecnico (kkkk)
+trocar o schema.remove por deletemany (só pq ta deprecated e talves pare de funcionar daqui a pouco)

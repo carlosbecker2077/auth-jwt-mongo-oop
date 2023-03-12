@@ -49,7 +49,7 @@ routes.put('/task', authMiddleware, (req, res) => {
     return updateTaskController.handle(req, res);
 });
 
-routes.delete('/task/:taskId', authMiddleware, (req, res) => {
+routes.delete('/task/:taskId?', authMiddleware, (req, res) => {
     return removeTaskController.handle(req, res);
 });
 

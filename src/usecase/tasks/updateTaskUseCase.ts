@@ -22,6 +22,6 @@ export class UpdateTaskUseCase {
         if (!userTaskExists) throw new NotFoundError();
 
         task.updatedAt = new Date();
-        return await this.tasksRepository.update(task);
+        return await this.tasksRepository.update(task, userId);
     }
 }

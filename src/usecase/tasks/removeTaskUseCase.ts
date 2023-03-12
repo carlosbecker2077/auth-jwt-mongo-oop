@@ -3,10 +3,12 @@ import { ITaskRepository } from '../../repositories/interfaces/taskRepository';
 
 export class RemoveTaskUseCase {
     constructor(private tasksRepository: ITaskRepository) {}
-    async execute(taskId: string, userId: string) {
+    async execute(userId: string, taskId?: string) {
+        if (!taskId) return await this.tasksRepository.remove(userId);
+
         const taskExists = await this.tasksRepository.findById(taskId, userId);
         if (!taskExists) throw new UnauthorizedError();
 
-        return await this.tasksRepository.remove(taskId);
+        return await this.tasksRepository.remove(userId, taskId);
     }
 }
