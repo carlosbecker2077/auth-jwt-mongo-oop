@@ -10,7 +10,7 @@ export class MongoTasksRepository implements ITaskRepository {
 
     async update(task: Task, userId: string): Promise<void> {
         const result = await TaskSchema.findOneAndUpdate(
-            { id: task.id, userId },
+            { _id: task.id as string, userId },
             task
         );
         if (!result) throw new Error('task not found');
