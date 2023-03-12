@@ -11,7 +11,8 @@ export class UpdateTaskUseCase {
             taskData.description,
             taskData.done,
             userId,
-            taskData.updatedAt
+            taskData.updatedAt,
+            taskData.id
         );
 
         const userTaskExists = await this.tasksRepository.findById(

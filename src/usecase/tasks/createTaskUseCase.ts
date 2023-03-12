@@ -10,7 +10,9 @@ export class CreateTaskUseCase {
             taskData.title,
             taskData.description,
             taskData.done,
-            userId
+            userId,
+            new Date(),
+            taskData.id
         );
 
         return await this.tasksRepository.save(task);
