@@ -27,7 +27,7 @@ routes.post('/login', (req, res) => {
 
 // todas as rotas abaixo são protegidas por token
 
-routes.put('/user/:', authMiddleware, (req, res) => {
+routes.put('/user', authMiddleware, (req, res) => {
     return updateUserController.handle(req, res);
 });
 

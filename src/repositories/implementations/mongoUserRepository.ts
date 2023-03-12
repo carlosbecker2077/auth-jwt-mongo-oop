@@ -13,12 +13,15 @@ export class MongoUsersRepository implements IUserRepository {
     }
 
     async findById(id: string): Promise<undefined | IUser | null> {
-        const user = await UserSchema.findOne({ id });
+        const user = await UserSchema.findOne({ _id: id });
         return user;
     }
 
     async update(user: User): Promise<void> {
-        const result = await UserSchema.findOneAndUpdate({ id: user.id }, user);
+        const result = await UserSchema.findOneAndUpdate(
+            { _id: user.id },
+            user
+        );
         if (!result) throw new Error('User not found');
     }
 
