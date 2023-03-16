@@ -2,14 +2,16 @@ import 'express-async-errors';
 import 'dotenv/config';
 import express from 'express';
 import { errorMiddleware } from './middlewares/error';
-import routes from './routes';
+import userRoutes from './routes/userRoutes';
+import taskRoutes from './routes/taskRoutes';
 import { MongoConnection } from './repositories/mongodb/mongoconnection';
 import swaggerUi from 'swagger-ui-express';
 import swaggerDocs from './swagger.json';
 
 const app = express();
 app.use(express.json());
-app.use(routes);
+app.use(userRoutes);
+app.use(taskRoutes);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.use(errorMiddleware);
 
