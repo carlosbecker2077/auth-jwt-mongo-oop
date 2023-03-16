@@ -41,10 +41,7 @@ export class MongoTasksRepository implements ITaskRepository {
         return task;
     }
 
-    async findByTitle(
-        title: string,
-        userId: string
-    ): Promise<undefined | ITask[] | null> {
+    async findByTitle({ title, userId }): Promise<undefined | ITask[] | null> {
         const task = await TaskSchema.find({ title, userId });
         return task;
     }
