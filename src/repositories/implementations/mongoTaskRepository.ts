@@ -25,7 +25,8 @@ export class MongoTasksRepository implements ITaskRepository {
 
         const result = TaskSchema.findOne({ userId, _id: id });
         if (!result) throw new Error('task not found');
-        await TaskSchema.remove({ userId, _id: id });
+        //await TaskSchema.remove({ userId, _id: id });
+        await TaskSchema.deleteMany({ userId, _id: id });
     }
 
     async findById(

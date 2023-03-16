@@ -26,7 +26,7 @@ export class MongoUsersRepository implements IUserRepository {
     }
 
     async remove(id: string): Promise<void> {
-        const result = await UserSchema.findOneAndDelete({ id });
+        const result = await UserSchema.deleteMany({ _id: id });
         if (!result) throw new Error('User not found');
     }
 }
