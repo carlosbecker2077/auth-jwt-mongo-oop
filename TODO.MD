@@ -17,5 +17,12 @@ Rotas para testar
 [x] refreshtoken (criar rota e testar)
 
 Debito tecnico (kkkk)
-[] trocar o schema.remove por deletemany (só pq ta deprecated e talves pare de funcionar daqui a pouco)
+[x] trocar o schema.remove por deletemany (só pq ta deprecated e talves pare de funcionar daqui a pouco)
 [x] separar as rotas de usuario e de task e de auth
+
+adicionar cobertura de testes na aplicacao
+[] testes de user
+[] testes de tasks
+[] testes de auth
+
+adicionar github actions
