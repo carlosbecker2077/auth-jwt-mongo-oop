@@ -14,7 +14,7 @@ Rotas para testar
 [x] findIDtask tem bug, não traz a task que eu coloco mas traz outra (sempre a mesma, mesmo que seja de outro usuário)
 [x] findTitletask vem task de outros caras
 [x] findUsertask
-[] refreshtoken (criar rota e testar)
+[x] refreshtoken (criar rota e testar)
 
 Debito tecnico (kkkk)
 [] trocar o schema.remove por deletemany (só pq ta deprecated e talves pare de funcionar daqui a pouco)

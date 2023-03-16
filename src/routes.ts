@@ -25,6 +25,11 @@ routes.post('/login', (req, res) => {
     return loginController.handle(req, res);
 });
 
+// refresh token
+routes.post('/refreshToken', (req, res) => {
+    return refreshTokenController.handle(req, res);
+});
+
 // todas as rotas abaixo são protegidas por token
 
 routes.put('/user', authMiddleware, (req, res) => {
@@ -64,10 +69,4 @@ routes.get('/task/title/:title', authMiddleware, (req, res) => {
 routes.get('/task/user/', authMiddleware, (req, res) => {
     return findTaskByUserIdController.handle(req, res);
 });
-
-// refresh token
-routes.post('/refreshToken', authMiddleware, (req, res) => {
-    return refreshTokenController.handle(req, res);
-});
-
 export default routes;
