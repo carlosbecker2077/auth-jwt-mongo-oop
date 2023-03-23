@@ -36,3 +36,17 @@ export class InvalidEmailOrPasswordError extends ApiError {
         super(message, 401);
     }
 }
+
+export class InvalidValidationEmail extends ApiError {
+    constructor(message = 'Invalid e-mail') {
+        super(message, 401);
+    }
+}
+
+export class InvalidValidationPassword extends ApiError {
+    constructor(
+        message = 'Invalid password - Must contain 6 characters or more'
+    ) {
+        super(message, 401);
+    }
+}

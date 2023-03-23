@@ -21,7 +21,13 @@ Debito tecnico (kkkk)
 [x] separar as rotas de usuario e de task e de auth
 
 adicionar cobertura de testes na aplicacao
-[] testes de user
+[x] testes de user
+[x] create
+[x] update
+[x] remove
+[x] findId
+[x] findEmail
+
 [] testes de tasks
 [] testes de auth
 

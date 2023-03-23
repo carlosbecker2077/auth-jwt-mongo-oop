@@ -1,7 +1,7 @@
 import { User } from '../../entities/User/User';
 import {
     EmailAlreadyExistsError,
-    UnauthorizedError,
+    NotFoundError,
 } from '../../helpers/api-erros';
 import { IUserRequestDTO } from './UserDTO';
 import { IUserRepository } from '../../repositories/interfaces/userRepository';
@@ -28,7 +28,7 @@ export class UpdateUserUseCase {
         }
 
         const userExists = await this.usersRepository.findById(userId);
-        if (!userExists) throw new UnauthorizedError();
+        if (!userExists) throw new NotFoundError();
 
         user.password = await UserPassword.encryptPassword(user.password);
         user.updatedAt = new Date();

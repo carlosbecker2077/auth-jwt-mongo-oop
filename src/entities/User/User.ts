@@ -1,4 +1,8 @@
 import { uuid } from 'uuidv4';
+import {
+    InvalidValidationEmail,
+    InvalidValidationPassword,
+} from '../../helpers/api-erros';
 import { UserValidation } from './validations';
 
 export class User {
@@ -23,12 +27,10 @@ export class User {
         this.updatedAt = updatedAt as Date;
 
         if (!UserValidation.validationEmail(email)) {
-            throw new Error(`Invalid e-mail: '${email}'`);
+            throw new InvalidValidationEmail();
         }
         if (!UserValidation.validationPassword(password)) {
-            throw new Error(
-                'Invalid password - Must contain 6 characters or more'
-            );
+            throw new InvalidValidationPassword();
         }
     }
 }
