@@ -28,7 +28,14 @@ adicionar cobertura de testes na aplicacao
 [x] findId
 [x] findEmail
 
-[] testes de tasks
+testes de tasks
+[x] criar task - uma coisa que eu observei é que no create não tem validação de usuario, ou seja se o cara for malando e gerar um jwt e passar no bearer vai deixar criar a task. pode ser interessante colocar algum tipo de validação.
+[x] atualizar task
+[x] remover task
+[x] achar taks por titulo
+[x] achar task por userId
+[x] achar task por id de task
+
 [] testes de auth
 
 adicionar github actions

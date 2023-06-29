@@ -19,7 +19,7 @@ describe('delete User example ', () => {
         await deleteUserUseCase.execute('userid');
         expect(taskRepositoryMock.remove).toBeCalled();
     });
-    test('shoud be not able remove user with not found error', async () => {
+    test('shoud not be able remove user with not found error', async () => {
         const deleteTaskUseCaseWithError = new RemoveUserUseCase(
             userRepositoryMockWithError,
             taskRepositoryMockWithError
